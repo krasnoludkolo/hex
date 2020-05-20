@@ -9,10 +9,8 @@ internal class BoardTest {
             .addEdge(BoardCell(1 to 1), BoardCell(1 to 2))
             .build()
 
-        assertTrue {
-            board.adjacencyMap[BoardCell(1 to 1)].get().contains(BoardCell(1 to 2)) &&
-                    board.adjacencyMap[BoardCell(1 to 2)].get().contains(BoardCell(1 to 1))
-        }
+        assertTrue { board.hasEdge(1 to 1, 1 to 2) }
+        assertTrue { board.hasEdge(1 to 2, 1 to 1) }
 
 
     }
@@ -24,10 +22,8 @@ internal class BoardTest {
             .addEdge(BoardCell(1 to 1), BoardCell(1 to 3))
             .build()
 
-        assertTrue {
-            board.adjacencyMap[BoardCell(1 to 1)].get().contains(BoardCell(1 to 2)) &&
-                    board.adjacencyMap[BoardCell(1 to 1)].get().contains(BoardCell(1 to 3))
-        }
+        assertTrue { board.hasEdge(1 to 1, 1 to 2) }
+        assertTrue { board.hasEdge(1 to 1, 1 to 3) }
     }
 
     @Test
@@ -39,12 +35,10 @@ internal class BoardTest {
             .addEdge(UpWallCell(2), BoardCell(1 to 2))
             .build()
 
-        assertTrue {
-            board.adjacencyMap[BoardCell(1 to 1)].get().contains(BoardCell(1 to 2)) &&
-                    board.adjacencyMap[BoardCell(1 to 1)].get().contains(UpWallCell(1)) &&
-                    board.adjacencyMap[BoardCell(1 to 2)].get().contains(UpWallCell(2)) &&
-                    board.adjacencyMap[BoardCell(1 to 2)].get().contains(BoardCell(1 to 1))
-        }
+        assertTrue { board.hasEdge(1 to 1, 1 to 2) }
+        assertTrue { board.hasEdge(1 to 2, 1 to 1) }
+        assertTrue { board.hasEdgeWithUp(1 to 1,1) }
+        assertTrue { board.hasEdgeWithUp(1 to 2,2) }
     }
 
 }
