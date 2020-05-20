@@ -9,9 +9,3 @@ data class DownWallCell(val n:Int) : Cell()
 data class LeftWallCell(val n:Int) : Cell()
 data class RightWallCell(val n:Int) : Cell()
 
-data class Point(val x: Int, val y: Int) {
-    override fun toString(): String {
-        return "($x:$y)"
-    }
-}
-

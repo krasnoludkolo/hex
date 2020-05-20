@@ -1,22 +1,23 @@
-import io.vavr.collection.HashSet
+import io.vavr.kotlin.getOrNull
 
 fun Board.hasEdge(from: Pair<Int, Int>, to: Pair<Int, Int>): Boolean {
-    return adjacencyMap[BoardCell(from)].getOrElse(HashSet.empty()).contains(BoardCell(to))
+    return adjacencyMap.getOrNull(BoardCell(from))?.contains(BoardCell(to)) ?: false
 }
 
 fun Board.hasEdgeWithUp(from: Pair<Int, Int>, n: Int): Boolean {
-    return adjacencyMap[BoardCell(from)].getOrElse(HashSet.empty()).contains(UpWallCell(n))
+    return adjacencyMap.getOrNull(BoardCell(from))?.contains(UpWallCell(n)) ?: false
 }
 
 fun Board.hasEdgeWithDown(from: Pair<Int, Int>, n: Int): Boolean {
-    return adjacencyMap[BoardCell(from)].getOrElse(HashSet.empty()).contains(DownWallCell(n))
+    return adjacencyMap.getOrNull(BoardCell(from))?.contains(DownWallCell(n)) ?: false
 }
 
 fun Board.hasEdgeWithLeft(from: Pair<Int, Int>, n: Int): Boolean {
-    return adjacencyMap[BoardCell(from)].getOrElse(HashSet.empty()).contains(LeftWallCell(n))
+    return adjacencyMap.getOrNull(BoardCell(from))?.contains(LeftWallCell(n)) ?: false
 }
 
 fun Board.hasEdgeWithRight(from: Pair<Int, Int>, n: Int): Boolean {
-    return adjacencyMap[BoardCell(from)].getOrElse(HashSet.empty()).contains(RightWallCell(n))
+    return adjacencyMap.getOrNull(BoardCell(from))?.contains(RightWallCell(n)) ?: false
 }
 
+fun Board.getPieceAt(point: Point) = piecesMap.getOrNull(point)

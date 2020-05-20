@@ -5,7 +5,7 @@ internal class BoardTest {
 
     @Test
     fun `should create add edge`() {
-        val board = Board.BoardBuilder()
+        val board = BoardBuilder()
             .addEdge(BoardCell(1 to 1), BoardCell(1 to 2))
             .build()
 
@@ -17,7 +17,7 @@ internal class BoardTest {
 
     @Test
     fun `should add edges from one vertex to many`() {
-        val board = Board.BoardBuilder()
+        val board = BoardBuilder()
             .addEdge(BoardCell(1 to 1), BoardCell(1 to 2))
             .addEdge(BoardCell(1 to 1), BoardCell(1 to 3))
             .build()
@@ -28,7 +28,7 @@ internal class BoardTest {
 
     @Test
     fun `should create edges from wall cell to board cell`() {
-        val board = Board.BoardBuilder()
+        val board = BoardBuilder()
             .addEdge(BoardCell(1 to 1), BoardCell(1 to 2))
             .addEdge(UpWallCell(1), BoardCell(1 to 1))
             .addEdge(UpWallCell(2), BoardCell(1 to 1))
