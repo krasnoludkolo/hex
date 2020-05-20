@@ -1,17 +1,14 @@
 import io.vavr.collection.HashMap
+import io.vavr.collection.List
 import io.vavr.collection.Map
 import io.vavr.collection.Set
 
 data class Board(
     val adjacencyMap: Map<Cell, Set<Cell>> = HashMap.empty(),
     val piecesMap: Map<Point, Piece> = HashMap.empty(),
-    val activePlayer: Player = RedPlayer
+    val activePlayer: Player = RedPlayer,
+    val history: List<Move> = List.empty()
 ) {
-
-    val left: List<LeftWallCell> = adjacencyMap.values().filterIsInstance<LeftWallCell>()
-    val right: List<RightWallCell> = adjacencyMap.values().filterIsInstance<RightWallCell>()
-    val down: List<DownWallCell> = adjacencyMap.values().filterIsInstance<DownWallCell>()
-    val up: List<UpWallCell> = adjacencyMap.values().filterIsInstance<UpWallCell>()
 
     fun makeMove(move: Move): MoveResult {
         return validateMove(move) ?: Success(performMove(move))
@@ -20,7 +17,8 @@ data class Board(
     private fun performMove(move: Move): Board {
         return this.copy(
             piecesMap = piecesMap.put(move.point, move.player.getPiece()),
-            activePlayer = activePlayer.nextPlayer()
+            activePlayer = activePlayer.nextPlayer(),
+            history = history.append(move)
         )
     }
 
