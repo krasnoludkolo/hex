@@ -5,7 +5,7 @@ import kotlin.math.min
 object BoardCreator {
 
     fun createBoard(size: Int): Board {
-        return Board.BoardBuilder()
+        return BoardBuilder()
             .addUpWall(size)
             .addDownWall(size)
             .addLeftWall(size)
@@ -14,7 +14,7 @@ object BoardCreator {
             .build()
     }
 
-    private fun Board.BoardBuilder.addBoard(size: Int): Board.BoardBuilder {
+    private fun BoardBuilder.addBoard(size: Int): BoardBuilder {
         val list = List.range(0, size)
             .flatMap { n -> List.range(0, size).map { it to n } }
         return list
@@ -27,7 +27,7 @@ object BoardCreator {
             }
     }
 
-    private fun Board.BoardBuilder.addUpWall(size: Int): Board.BoardBuilder {
+    private fun BoardBuilder.addUpWall(size: Int): BoardBuilder {
         return List.range(0, size + 1)
             .map { UpWallCell(it) }
             .fold(this) { acc, cell ->
@@ -37,7 +37,7 @@ object BoardCreator {
             }
     }
 
-    private fun Board.BoardBuilder.addDownWall(size: Int): Board.BoardBuilder {
+    private fun BoardBuilder.addDownWall(size: Int): BoardBuilder {
         return List.range(0, size + 1)
             .map { DownWallCell(it) }
             .fold(this) { acc, cell ->
@@ -47,7 +47,7 @@ object BoardCreator {
             }
     }
 
-    private fun Board.BoardBuilder.addLeftWall(size: Int): Board.BoardBuilder {
+    private fun BoardBuilder.addLeftWall(size: Int): BoardBuilder {
         return List.range(0, size + 1)
             .map { LeftWallCell(it) }
             .fold(this) { acc, cell ->
@@ -57,7 +57,7 @@ object BoardCreator {
             }
     }
 
-    private fun Board.BoardBuilder.addRightWall(size: Int): Board.BoardBuilder {
+    private fun BoardBuilder.addRightWall(size: Int): BoardBuilder {
         return List.range(0, size + 1)
             .map { RightWallCell(it) }
             .fold(this) { acc, cell ->
@@ -66,5 +66,7 @@ object BoardCreator {
                     .addEdge(cell, BoardCell(max(0, cell.n - 1) to size - 1))
             }
     }
+
+
 
 }
