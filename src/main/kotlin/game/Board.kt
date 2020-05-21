@@ -28,7 +28,6 @@ data class Board(
     private fun performNormalMove(move: NormalMove): Board = this.copy(
         piecesMap = piecesMap.put(move.point, move.player.getPiece()),
         activePlayer = activePlayer.nextPlayer()
-
     )
 
     private fun performSwitchMove(): Board {
