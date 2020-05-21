@@ -12,4 +12,4 @@ data class NormalMove(
     }
 }
 
-
+object SwitchMove : Move()
