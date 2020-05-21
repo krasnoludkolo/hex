@@ -20,10 +20,10 @@ data class Board(
         return when (move) {
             is NormalMove -> performNormalMove(move)
             is SwitchMove -> performSwitchMove()
-        }.copy(
-            history = history.append(move)
-        )
+        }.addToHistory(move)
     }
+
+    private fun addToHistory(move: Move) = this.copy(history = history.append(move))
 
     private fun performNormalMove(move: NormalMove): Board = this.copy(
         piecesMap = piecesMap.put(move.point, move.player.getPiece()),
