@@ -3,7 +3,7 @@ package game.engine
 import game.*
 import io.vavr.collection.List
 
-class EmptyGame(
+internal class EmptyGame(
     private val board: Board
 ) : Game {
 

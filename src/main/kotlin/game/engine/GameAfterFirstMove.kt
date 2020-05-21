@@ -3,7 +3,7 @@ package game.engine
 import game.*
 import io.vavr.collection.List
 
-data class GameAfterFirstMove(
+internal data class GameAfterFirstMove(
     private val board: Board,
     private val activePlayer: Player,
     private val history: List<Move> = List.empty()

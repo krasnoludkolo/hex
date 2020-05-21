@@ -4,7 +4,7 @@ import game.*
 import io.vavr.collection.HashMap
 import io.vavr.collection.List
 
-class GameWithFirstRedPiece(
+internal class GameWithFirstRedPiece(
     private val board: Board,
     private val piecePoint: Point
 ) : Game {
