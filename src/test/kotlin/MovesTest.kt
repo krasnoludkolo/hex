@@ -7,7 +7,7 @@ internal class MovesTest {
     fun `should place red piece`() {
         val board = BoardCreator.createBoard(3)
         val movePoint = Point(1, 1)
-        val move = Move.red(movePoint)
+        val move = NormalMove.red(movePoint)
 
         val moveResult = board.makeMove(move)
 
@@ -19,7 +19,7 @@ internal class MovesTest {
     fun `should not place blue piece as first`() {
         val board = BoardCreator.createBoard(3)
         val movePoint = Point(1, 1)
-        val move = Move.blue(movePoint)
+        val move = NormalMove.blue(movePoint)
 
         val moveResult = board.makeMove(move)
 
@@ -30,12 +30,12 @@ internal class MovesTest {
     @Test
     fun `cannot place piece on occupied space`() {
         val movePoint = Point(1, 1)
-        val move = Move.red(movePoint)
+        val move = NormalMove.red(movePoint)
         val (board) = BoardCreator
             .createBoard(3)
             .makeMove(move) as Success
 
-        val moveResult = board.makeMove(Move.blue(movePoint))
+        val moveResult = board.makeMove(NormalMove.blue(movePoint))
 
         assertTrue { moveResult is ErrorMove }
         assertTrue { (moveResult as ErrorMove).e == ErrorMove.Error.TAKEN_PLACE }
@@ -44,8 +44,8 @@ internal class MovesTest {
     @Test
     fun `should blue place as second move`() {
         val movePoint = Point(1, 1)
-        val move = Move.red(movePoint)
-        val blueMove = Move.blue(Point(1, 0))
+        val move = NormalMove.red(movePoint)
+        val blueMove = NormalMove.blue(Point(1, 0))
         val (board) = BoardCreator
             .createBoard(3)
             .makeMove(move) as Success

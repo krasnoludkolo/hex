@@ -1,18 +1,12 @@
-sealed class Player {
-    fun nextPlayer() = if (this is RedPlayer) BluePlayer else RedPlayer
-    fun getPiece() = if (this is RedPlayer) RedPiece else BluePiece
-}
+sealed class Move
 
-object RedPlayer : Player()
-object BluePlayer : Player()
-
-data class Move(
+data class NormalMove(
     val player: Player,
     val point: Point
-) {
+) : Move() {
     companion object {
-        fun red(point: Point) = Move(RedPlayer, point)
-        fun blue(point: Point) = Move(BluePlayer, point)
+        fun red(point: Point) = NormalMove(RedPlayer, point)
+        fun blue(point: Point) = NormalMove(BluePlayer, point)
     }
 }
 
