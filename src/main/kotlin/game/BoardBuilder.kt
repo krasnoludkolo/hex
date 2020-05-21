@@ -1,3 +1,5 @@
+package game
+
 import io.vavr.collection.HashMap
 import io.vavr.collection.Map
 import io.vavr.collection.Set

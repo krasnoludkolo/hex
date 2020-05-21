@@ -1,3 +1,5 @@
+package game
+
 sealed class Piece
 
 object RedPiece : Piece()

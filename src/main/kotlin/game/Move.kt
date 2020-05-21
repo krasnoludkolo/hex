@@ -1,3 +1,5 @@
+package game
+
 sealed class Move
 
 data class NormalMove(

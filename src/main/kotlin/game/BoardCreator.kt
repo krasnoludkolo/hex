@@ -1,3 +1,5 @@
+package game
+
 import io.vavr.collection.List
 import java.lang.Integer.max
 import kotlin.math.min
@@ -21,7 +23,10 @@ object BoardCreator {
             .fold(this) { acc, p ->
                 val cell = BoardCell(p.first to p.second)
                 acc
-                    .addEdge(cell, BoardCell(max(0, cell.point.x - 1) to max(0, cell.point.y - 1)))
+                    .addEdge(
+                        cell,
+                        BoardCell(max(0, cell.point.x - 1) to max(0, cell.point.y - 1))
+                    )
                     .addEdge(cell, BoardCell(cell.point.x to max(0, cell.point.y - 1)))
                     .addEdge(cell, BoardCell(max(0, cell.point.x - 1) to cell.point.y))
             }
@@ -66,7 +71,6 @@ object BoardCreator {
                     .addEdge(cell, BoardCell(max(0, cell.n - 1) to size - 1))
             }
     }
-
 
 
 }

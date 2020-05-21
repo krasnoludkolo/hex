@@ -1,3 +1,7 @@
+import game.BoardCreator
+import game.NormalMove
+import game.Point
+import game.Success
 import io.vavr.collection.List
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
