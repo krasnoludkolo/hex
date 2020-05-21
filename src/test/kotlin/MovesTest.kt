@@ -7,19 +7,19 @@ internal class MovesTest {
 
     @Test
     fun `should place red piece`() {
-        val board = BoardCreator.createBoard(3)
+        val board = GameCreator.createBoard(3)
         val movePoint = Point(1, 1)
         val move = NormalMove.red(movePoint)
 
         val moveResult = board.makeMove(move)
 
         assertTrue { moveResult is Success }
-        assertTrue { (moveResult as Success).board.getPieceAt(movePoint) == RedPiece }
+        assertTrue { (moveResult as Success).game.getBoard().getPieceAt(movePoint) == RedPiece }
     }
 
     @Test
     fun `should not place blue piece as first`() {
-        val board = BoardCreator.createBoard(3)
+        val board = GameCreator.createBoard(3)
         val movePoint = Point(1, 1)
         val move = NormalMove.blue(movePoint)
 
@@ -33,7 +33,7 @@ internal class MovesTest {
     fun `cannot place piece on occupied space`() {
         val movePoint = Point(1, 1)
         val move = NormalMove.red(movePoint)
-        val (board) = BoardCreator
+        val (board) = GameCreator
             .createBoard(3)
             .makeMove(move) as Success
 
@@ -48,28 +48,28 @@ internal class MovesTest {
         val movePoint = Point(1, 1)
         val move = NormalMove.red(movePoint)
         val blueMove = NormalMove.blue(Point(1, 0))
-        val (board) = BoardCreator
+        val (board) = GameCreator
             .createBoard(3)
             .makeMove(move) as Success
 
         val moveResult = board.makeMove(blueMove)
 
         assertTrue { moveResult is Success }
-        assertTrue { (moveResult as Success).board.getPieceAt(blueMove.point) == BluePiece }
+        assertTrue { (moveResult as Success).game.getBoard().getPieceAt(blueMove.point) == BluePiece }
     }
 
     @Test
     fun `should blue switch colors as first move`() {
         val redMovePoint = Point(1, 1)
         val move = NormalMove.red(redMovePoint)
-        val (board) = BoardCreator
+        val (board) = GameCreator
             .createBoard(3)
             .makeMove(move) as Success
 
         val moveResult = board.makeMove(SwitchMove)
 
         assertTrue { moveResult is Success }
-        assertTrue { (moveResult as Success).board.getPieceAt(redMovePoint) == BluePiece }
+        assertTrue { (moveResult as Success).game.getBoard().getPieceAt(redMovePoint) == BluePiece }
     }
 
     @Test
@@ -80,14 +80,14 @@ internal class MovesTest {
         val moves = List.of(move1, move2, move3)
 
         val board = moves
-            .fold(BoardCreator.createBoard(3)) { board, move ->
-                (board.makeMove(move) as Success).board
+            .fold(GameCreator.createBoard(3)) { board, move ->
+                (board.makeMove(move) as Success).game
             }
 
         val moveResult = board.makeMove(SwitchMove)
 
         assertTrue { moveResult is ErrorMove }
-        assertTrue { (moveResult as ErrorMove).e == ErrorMove.Error.SWITCH_AFTER_FIRST_TURN }
+        assertTrue { (moveResult as ErrorMove).e == ErrorMove.Error.SWITCH_IN_WRONG_TURN }
     }
 
 }

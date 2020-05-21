@@ -1,19 +1,23 @@
 package game
 
+import game.engine.EmptyGame
+import game.engine.Game
 import io.vavr.collection.List
 import java.lang.Integer.max
 import kotlin.math.min
 
-object BoardCreator {
+object GameCreator {
 
-    fun createBoard(size: Int): Board {
-        return BoardBuilder()
-            .addUpWall(size)
-            .addDownWall(size)
-            .addLeftWall(size)
-            .addRightWall(size)
-            .addBoard(size)
-            .build()
+    fun createBoard(size: Int): Game {
+        return EmptyGame(
+            BoardBuilder()
+                .addUpWall(size)
+                .addDownWall(size)
+                .addLeftWall(size)
+                .addRightWall(size)
+                .addBoard(size)
+                .build()
+        )
     }
 
     private fun BoardBuilder.addBoard(size: Int): BoardBuilder {

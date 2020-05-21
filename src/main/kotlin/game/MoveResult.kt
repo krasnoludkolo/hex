@@ -1,15 +1,17 @@
 package game
 
+import game.engine.Game
+
 sealed class MoveResult
-data class Success(val board: Board) : MoveResult()
+data class Success(val game: Game) : MoveResult()
 data class ErrorMove(val e: Error) : MoveResult() {
     enum class Error {
-        WRONG_TURN, TAKEN_PLACE, SWITCH_AFTER_FIRST_TURN
+        WRONG_TURN, TAKEN_PLACE, SWITCH_IN_WRONG_TURN
     }
 
     companion object {
         fun wrongTurn() = ErrorMove(Error.WRONG_TURN)
         fun takenPlace() = ErrorMove(Error.TAKEN_PLACE)
-        fun switchAfterFirstTurn() = ErrorMove(Error.SWITCH_AFTER_FIRST_TURN)
+        fun switchInWrongTurn() = ErrorMove(Error.SWITCH_IN_WRONG_TURN)
     }
 }
