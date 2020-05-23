@@ -1,6 +1,7 @@
 import game.*
 import io.vavr.collection.List
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 
 internal class MovesTest {
@@ -13,8 +14,14 @@ internal class MovesTest {
 
         val moveResult = board.makeMove(move)
 
-        assertTrue { moveResult is Success }
-        assertTrue { (moveResult as Success).game.getBoard().getPieceAt(movePoint) == RedPiece }
+        if (moveResult is Success) {
+            val status = moveResult.game.getStatus()
+            if (status is OngoingGameStatus)
+                assertTrue { status.board.getPieceAt(movePoint) == RedPiece }
+        } else {
+            fail()
+        }
+
     }
 
     @Test
@@ -54,8 +61,13 @@ internal class MovesTest {
 
         val moveResult = board.makeMove(blueMove)
 
-        assertTrue { moveResult is Success }
-        assertTrue { (moveResult as Success).game.getBoard().getPieceAt(blueMove.point) == BluePiece }
+        if (moveResult is Success) {
+            val status = moveResult.game.getStatus()
+            if (status is OngoingGameStatus)
+                assertTrue { status.board.getPieceAt(blueMove.point) == BluePiece }
+        } else {
+            fail()
+        }
     }
 
     @Test
@@ -68,8 +80,13 @@ internal class MovesTest {
 
         val moveResult = board.makeMove(SwitchMove)
 
-        assertTrue { moveResult is Success }
-        assertTrue { (moveResult as Success).game.getBoard().getPieceAt(redMovePoint) == BluePiece }
+        if (moveResult is Success) {
+            val status = moveResult.game.getStatus()
+            if (status is OngoingGameStatus)
+                assertTrue { status.board.getPieceAt(redMovePoint) == BluePiece }
+        } else {
+            fail()
+        }
     }
 
     @Test

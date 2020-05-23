@@ -54,6 +54,6 @@ internal class GameWithFirstRedPiece(
         return List.of(NormalMove(RedPlayer, piecePoint))
     }
 
-    override fun getBoard(): Board = board
+    override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedPlayer)
 }
 

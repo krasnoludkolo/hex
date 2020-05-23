@@ -43,6 +43,6 @@ internal data class GameAfterFirstMove(
 
     override fun getHistory(): List<Move> = history
 
-    override fun getBoard(): Board = board
+    override fun getStatus(): GameStatus = GameStatus.ongoing(board, activePlayer)
 
 }

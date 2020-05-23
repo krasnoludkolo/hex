@@ -27,5 +27,5 @@ internal class EmptyGame(
 
     override fun getHistory(): List<Move> = List.empty()
 
-    override fun getBoard(): Board = board
+    override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedPlayer)
 }
