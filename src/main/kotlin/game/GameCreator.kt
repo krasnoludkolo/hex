@@ -10,6 +10,7 @@ import kotlin.math.min
 object GameCreator {
 
     fun createGame(size: Int): Game {
+        if (size < 3) throw IllegalArgumentException("Ok, So Basically Im Very Smol")
         return EmptyGame(
             BoardBuilder()
                 .addUpWall(size)
