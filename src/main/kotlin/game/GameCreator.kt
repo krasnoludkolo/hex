@@ -3,12 +3,13 @@ package game
 import game.engine.EmptyGame
 import game.engine.Game
 import io.vavr.collection.List
+import io.vavr.kotlin.pair
 import java.lang.Integer.max
 import kotlin.math.min
 
 object GameCreator {
 
-    fun createBoard(size: Int): Game {
+    fun createGame(size: Int): Game {
         return EmptyGame(
             BoardBuilder()
                 .addUpWall(size)
@@ -22,7 +23,8 @@ object GameCreator {
 
     private fun BoardBuilder.addBoard(size: Int): BoardBuilder {
         val list = List.range(0, size)
-            .flatMap { n -> List.range(0, size).map { it to n } }
+            .crossProduct()
+            .map { it.pair() }
         return list
             .fold(this) { acc, p ->
                 val cell = BoardCell(p.first to p.second)

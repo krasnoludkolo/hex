@@ -8,7 +8,7 @@ internal class GameCreatorTest {
 
     @Test
     fun `should create edges from up wall`() {
-        val status = GameCreator.createBoard(3).getStatus()
+        val status = GameCreator.createGame(3).getStatus()
         if (status is OngoingGameStatus) {
             val board = status.board
             assertTrue { board.hasEdgeWithUp(0 to 0, 0) }
@@ -26,7 +26,7 @@ internal class GameCreatorTest {
 
     @Test
     fun `should create edges from down wall`() {
-        val status = GameCreator.createBoard(3).getStatus()
+        val status = GameCreator.createGame(3).getStatus()
         if (status is OngoingGameStatus) {
             val board = status.board
             assertTrue { board.hasEdgeWithDown(2 to 0, 0) }
@@ -43,7 +43,7 @@ internal class GameCreatorTest {
 
     @Test
     fun `should create edges from left wall`() {
-        val status = GameCreator.createBoard(3).getStatus()
+        val status = GameCreator.createGame(3).getStatus()
         if (status is OngoingGameStatus) {
             val board = status.board
             assertTrue { board.hasEdgeWithLeft(0 to 0, 0) }
@@ -60,7 +60,7 @@ internal class GameCreatorTest {
 
     @Test
     fun `should create edges from right wall`() {
-        val status = GameCreator.createBoard(3).getStatus()
+        val status = GameCreator.createGame(3).getStatus()
         if (status is OngoingGameStatus) {
             val board = status.board
 
@@ -78,7 +78,7 @@ internal class GameCreatorTest {
 
     @Test
     fun `should create edges from central cell`() {
-        val status = GameCreator.createBoard(3).getStatus()
+        val status = GameCreator.createGame(3).getStatus()
         if (status is OngoingGameStatus) {
             val board = status.board
             assertTrue { board.hasEdge(1 to 1, 0 to 0) }
@@ -95,7 +95,7 @@ internal class GameCreatorTest {
 
     @Test
     fun `should create edges from cell next to wall`() {
-        val status = GameCreator.createBoard(3).getStatus()
+        val status = GameCreator.createGame(3).getStatus()
         if (status is OngoingGameStatus) {
             val board = status.board
             assertTrue { board.hasEdge(0 to 1, 0 to 0) }

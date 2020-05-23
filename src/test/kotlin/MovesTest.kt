@@ -1,5 +1,4 @@
 import game.*
-import io.vavr.collection.List
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
@@ -8,7 +7,7 @@ internal class MovesTest {
 
     @Test
     fun `should place red piece`() {
-        val board = GameCreator.createBoard(3)
+        val board = GameCreator.createGame(3)
         val movePoint = Point(1, 1)
         val move = NormalMove.red(movePoint)
 
@@ -26,7 +25,7 @@ internal class MovesTest {
 
     @Test
     fun `should not place blue piece as first`() {
-        val board = GameCreator.createBoard(3)
+        val board = GameCreator.createGame(3)
         val movePoint = Point(1, 1)
         val move = NormalMove.blue(movePoint)
 
@@ -41,7 +40,7 @@ internal class MovesTest {
         val movePoint = Point(1, 1)
         val move = NormalMove.red(movePoint)
         val (board) = GameCreator
-            .createBoard(3)
+            .createGame(3)
             .makeMove(move) as Success
 
         val moveResult = board.makeMove(NormalMove.blue(movePoint))
@@ -54,9 +53,9 @@ internal class MovesTest {
     fun `should blue place as second move`() {
         val movePoint = Point(1, 1)
         val move = NormalMove.red(movePoint)
-        val blueMove = NormalMove.blue(Point(1, 0))
+        val blueMove = blue(1, 0)
         val (board) = GameCreator
-            .createBoard(3)
+            .createGame(3)
             .makeMove(move) as Success
 
         val moveResult = board.makeMove(blueMove)
@@ -75,7 +74,7 @@ internal class MovesTest {
         val redMovePoint = Point(1, 1)
         val move = NormalMove.red(redMovePoint)
         val (board) = GameCreator
-            .createBoard(3)
+            .createGame(3)
             .makeMove(move) as Success
 
         val moveResult = board.makeMove(SwitchMove)
@@ -91,17 +90,16 @@ internal class MovesTest {
 
     @Test
     fun `should not switch colors if not first move`() {
-        val move1 = NormalMove.red(Point(1, 1))
-        val move2 = NormalMove.blue(Point(0, 1))
-        val move3 = NormalMove.red(Point(2, 1))
-        val moves = List.of(move1, move2, move3)
+        val game = GameCreator
+            .createGame(3)
+            .makeMoves(
+                red(2, 1),
+                blue(0, 1),
+                red(1, 1)
+            )
 
-        val board = moves
-            .fold(GameCreator.createBoard(3)) { board, move ->
-                (board.makeMove(move) as Success).game
-            }
 
-        val moveResult = board.makeMove(SwitchMove)
+        val moveResult = game.makeMove(SwitchMove)
 
         assertTrue { moveResult is ErrorMove }
         assertTrue { (moveResult as ErrorMove).e == ErrorMove.Error.SWITCH_IN_WRONG_TURN }
