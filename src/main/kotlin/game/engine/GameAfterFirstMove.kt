@@ -14,8 +14,14 @@ internal data class GameAfterFirstMove(
     }
 
     private fun performMove(move: NormalMove): Game {
-        return performNormalMove(move).addToHistory(move)
+        return performNormalMove(move)
+            .addToHistory(move)
+            .checkIfGameHasEnded()
     }
+
+    private fun checkIfGameHasEnded(): Game = if (board.hasEnded()) generateEndGame() else this
+
+    private fun generateEndGame() = EndedGame(board, history, activePlayer.nextPlayer())
 
     private fun addToHistory(move: Move) = this.copy(history = history.append(move))
 

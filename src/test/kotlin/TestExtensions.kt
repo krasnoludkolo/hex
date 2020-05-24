@@ -23,6 +23,7 @@ fun Board.hasEdgeWithRight(from: Pair<Int, Int>, n: Int): Boolean {
     return adjacencyMap.getOrNull(BoardCell(from))?.contains(RightWallCell(n)) ?: false
 }
 
+fun switch() = SwitchMove
 fun blue(x: Int, y: Int) = NormalMove.blue(Point(x, y))
 fun red(x: Int, y: Int) = NormalMove.red(Point(x, y))
 
