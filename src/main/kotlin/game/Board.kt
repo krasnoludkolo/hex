@@ -31,8 +31,7 @@ data class Board(
 
         fun dfs(trace: Set<Cell>, current: Cell): Boolean {
             val next = adjacencyMap
-                .get(current)
-                .get()
+                .getOrElse(current, HashSet.empty())
                 .removeAll(trace)
             return if (next.any { endWall.contains(it) }) {
                 true
