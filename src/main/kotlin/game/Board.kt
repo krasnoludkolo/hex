@@ -8,7 +8,11 @@ import io.vavr.kotlin.getOrNull
 
 data class Board(
     val adjacencyMap: Map<Cell, Set<Cell>> = HashMap.empty(),
-    val piecesMap: Map<Point, Piece> = HashMap.empty()
+    val piecesMap: Map<Point, Piece> = HashMap.empty(),
+    val upWalls: Set<Cell> = adjacencyMap.keySet().filter { it is UpWallCell },
+    val downWalls: Set<Cell> = adjacencyMap.keySet().filter { it is DownWallCell },
+    val leftWalls: Set<Cell> = adjacencyMap.keySet().filter { it is LeftWallCell },
+    val rightWalls: Set<Cell> = adjacencyMap.keySet().filter { it is RightWallCell }
 ) {
 
     fun putPiece(point: Point, piece: Piece) = copy(
@@ -17,50 +21,30 @@ data class Board(
 
     fun putPiece(move: NormalMove) = putPiece(move.point, move.player.getPiece())
 
-    fun hasEnded(): Boolean {
-        return isVerticalConnection() || isHorizontalConnection()
-    }
+    fun hasEnded(): Boolean = isVerticalConnection() || hasHorizontalConnection()
 
-    private fun isHorizontalConnection(): Boolean {
-        val leftWalls = adjacencyMap.keySet().filterIsInstance<LeftWallCell>()
+    private fun isVerticalConnection(): Boolean = hasConnection(upWalls, downWalls, BluePiece)
 
-        fun dfsRed(trace: Set<Cell>, current: Cell): Boolean {
+    private fun hasHorizontalConnection(): Boolean = hasConnection(leftWalls, rightWalls, RedPiece)
+
+    private fun hasConnection(startWall: Set<Cell>, endWall: Set<Cell>, playerPiece: Piece): Boolean {
+
+        fun dfs(trace: Set<Cell>, current: Cell): Boolean {
             val next = adjacencyMap
                 .get(current)
                 .get()
                 .removeAll(trace)
-            return if (next.any { it is RightWallCell }) {
+            return if (next.any { endWall.contains(it) }) {
                 true
             } else {
                 next
                     .filterIsInstance<BoardCell>()
-                    .filter { piecesMap.getOrNull(it.point) is RedPiece }
-                    .any { dfsRed(trace.add(it), it) }
+                    .filter { piecesMap.getOrNull(it.point) == playerPiece }
+                    .any { dfs(trace.add(it), it) }
             }
         }
 
-        return leftWalls.any { dfsRed(HashSet.of(it), it) }
-    }
-
-    private fun isVerticalConnection(): Boolean {
-        val upWalls = adjacencyMap.keySet().filterIsInstance<UpWallCell>()
-
-        fun dfsBlue(trace: Set<Cell>, current: Cell): Boolean {
-            val next = adjacencyMap
-                .get(current)
-                .get()
-                .removeAll(trace)
-            return if (next.any { it is DownWallCell }) {
-                true
-            } else {
-                next
-                    .filterIsInstance<BoardCell>()
-                    .filter { piecesMap.getOrNull(it.point) is BluePiece }
-                    .any { dfsBlue(trace.add(it), it) }
-            }
-        }
-
-        return upWalls.any { dfsBlue(HashSet.of(it), it) }
+        return startWall.any { dfs(HashSet.of(it), it) }
     }
 
 }
