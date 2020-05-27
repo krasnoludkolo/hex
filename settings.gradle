@@ -1,2 +1,3 @@
-rootProject.name = 'hex'
+rootProject.name = 'hex-game'
 
+include ":hex-rules"

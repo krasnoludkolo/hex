@@ -1,4 +1,5 @@
-import hex.*
+package hex
+
 import hex.engine.Game
 import io.vavr.collection.List
 import io.vavr.kotlin.getOrNull

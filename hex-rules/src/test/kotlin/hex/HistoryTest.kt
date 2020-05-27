@@ -1,4 +1,5 @@
-import hex.*
+package hex
+
 import io.vavr.collection.List
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
