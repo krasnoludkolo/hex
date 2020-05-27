@@ -8,14 +8,17 @@ class RandomBot(
 ) : Player {
 
     override fun makeMove(status: OngoingGameStatus): Move {
-        val cell = status
+        val possiblePlaces = status
             .board
             .adjacencyMap
             .keySet()
             .filterIsInstance<BoardCell>()
             .filter { !status.board.piecesMap.keySet().contains(it.point) }
+
+        val cell = possiblePlaces
             .shuffled()
             .first()
+
         return NormalMove(hexPlayer, cell.point)
     }
 
