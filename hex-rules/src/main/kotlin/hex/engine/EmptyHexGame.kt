@@ -3,9 +3,9 @@ package hex.engine
 import hex.*
 import io.vavr.collection.List
 
-internal class EmptyGame(
+internal class EmptyHexGame(
     private val board: Board
-) : Game {
+) : HexGame {
 
     override fun makeMove(move: Move): MoveResult {
         return validateMove(move) ?: successMove(move as NormalMove)
@@ -22,7 +22,7 @@ internal class EmptyGame(
     }
 
     private fun successMove(move: NormalMove): Success {
-        return Success(GameWithFirstRedPiece(board.putPiece(move), move.point))
+        return Success(HexGameWithFirstRedPiece(board.putPiece(move), move.point))
     }
 
     override fun getHistory(): List<Move> = List.empty()

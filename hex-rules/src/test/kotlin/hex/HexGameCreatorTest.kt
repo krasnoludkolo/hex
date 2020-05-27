@@ -3,7 +3,7 @@ package hex
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-internal class GameCreatorTest {
+internal class HexGameCreatorTest {
 
     @Test
     fun `should create edges from up wall`() {

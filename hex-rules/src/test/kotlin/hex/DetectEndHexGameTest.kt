@@ -3,7 +3,7 @@ package hex
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-internal class DetectEndGameTest {
+internal class DetectEndHexGameTest {
 
     @Test
     fun `should not detect ongoing game end`() {

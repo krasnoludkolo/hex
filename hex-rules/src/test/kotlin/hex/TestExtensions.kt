@@ -1,6 +1,6 @@
 package hex
 
-import hex.engine.Game
+import hex.engine.HexGame
 import io.vavr.collection.List
 import io.vavr.kotlin.getOrNull
 
@@ -30,5 +30,5 @@ fun red(x: Int, y: Int) = NormalMove.red(Point(x, y))
 
 fun Board.getPieceAt(point: Point) = piecesMap.getOrNull(point)
 
-fun Game.makeMoves(vararg moves: Move) =
-    List.ofAll(moves.toList()).fold(this) { board, move -> (board.makeMove(move) as Success).game }
+fun HexGame.makeMoves(vararg moves: Move) =
+    List.ofAll(moves.toList()).fold(this) { board, move -> (board.makeMove(move) as Success).hexGame }

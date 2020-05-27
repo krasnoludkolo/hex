@@ -4,10 +4,10 @@ import hex.*
 import io.vavr.collection.HashMap
 import io.vavr.collection.List
 
-internal class GameWithFirstRedPiece(
+internal class HexGameWithFirstRedPiece(
     private val board: Board,
     private val piecePoint: Point
-) : Game {
+) : HexGame {
 
     override fun makeMove(move: Move): MoveResult {
         return validateMove(move) ?: successMove(move)
@@ -31,16 +31,16 @@ internal class GameWithFirstRedPiece(
         }.toSuccess()
     }
 
-    private fun makeNormalMove(move: NormalMove): GameAfterFirstMove {
+    private fun makeNormalMove(move: NormalMove): HexGameAfterFirstMove {
         val newBoard = board.putPiece(move)
         val newHistory = getHistory().append(move)
-        return GameAfterFirstMove(newBoard, RedPlayer, newHistory)
+        return HexGameAfterFirstMove(newBoard, RedPlayer, newHistory)
     }
 
-    private fun makeSwitchMove(move: Move): GameAfterFirstMove {
+    private fun makeSwitchMove(move: Move): HexGameAfterFirstMove {
         val newBoard = board.switch()
         val newHistory = getHistory().append(move)
-        return GameAfterFirstMove(newBoard, RedPlayer, newHistory)
+        return HexGameAfterFirstMove(newBoard, RedPlayer, newHistory)
     }
 
     private fun Board.switch(): Board {

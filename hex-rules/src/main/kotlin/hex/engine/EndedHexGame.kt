@@ -3,11 +3,11 @@ package hex.engine
 import hex.*
 import io.vavr.collection.List
 
-class EndedGame(
+class EndedHexGame(
     private val board: Board,
     private val history: List<Move>,
     private val winner: Player
-) : Game {
+) : HexGame {
 
     override fun makeMove(move: Move): MoveResult = ErrorMove.endedGame()
 

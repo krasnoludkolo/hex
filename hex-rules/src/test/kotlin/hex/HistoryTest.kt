@@ -15,7 +15,7 @@ internal class HistoryTest {
 
         val game = moves
             .fold(GameCreator.createGame(3)) { board, move ->
-                (board.makeMove(move) as Success).game
+                (board.makeMove(move) as Success).hexGame
             }
 
         assertTrue { game.getHistory().containsAll(moves) }
@@ -31,7 +31,7 @@ internal class HistoryTest {
 
         val game = moves
             .fold(GameCreator.createGame(3)) { board, move ->
-                (board.makeMove(move) as Success).game
+                (board.makeMove(move) as Success).hexGame
             }
 
         assertTrue { game.getHistory().containsAll(moves) }

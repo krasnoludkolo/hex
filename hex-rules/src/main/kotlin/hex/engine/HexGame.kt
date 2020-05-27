@@ -6,11 +6,11 @@ import hex.MoveResult
 import hex.Success
 import io.vavr.collection.List
 
-interface Game {
+interface HexGame {
     fun makeMove(move: Move): MoveResult
     fun getHistory(): List<Move>
     fun getStatus(): GameStatus
 
-    fun Game.toSuccess(): Success = Success(this)
+    fun HexGame.toSuccess(): Success = Success(this)
 }
 

@@ -15,7 +15,7 @@ internal class MovesTest {
         val moveResult = board.makeMove(move)
 
         if (moveResult is Success) {
-            val status = moveResult.game.getStatus()
+            val status = moveResult.hexGame.getStatus()
             if (status is OngoingGameStatus)
                 assertTrue { status.board.getPieceAt(movePoint) == RedPiece }
         } else {
@@ -62,7 +62,7 @@ internal class MovesTest {
         val moveResult = board.makeMove(blueMove)
 
         if (moveResult is Success) {
-            val status = moveResult.game.getStatus()
+            val status = moveResult.hexGame.getStatus()
             if (status is OngoingGameStatus)
                 assertTrue { status.board.getPieceAt(blueMove.point) == BluePiece }
         } else {
@@ -81,7 +81,7 @@ internal class MovesTest {
         val moveResult = board.makeMove(SwitchMove)
 
         if (moveResult is Success) {
-            val status = moveResult.game.getStatus()
+            val status = moveResult.hexGame.getStatus()
             if (status is OngoingGameStatus)
                 assertTrue { status.board.getPieceAt(redMovePoint) == BluePiece }
         } else {

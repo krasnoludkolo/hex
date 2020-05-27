@@ -3,29 +3,29 @@ package hex.engine
 import hex.*
 import io.vavr.collection.List
 
-internal data class GameAfterFirstMove(
+internal data class HexGameAfterFirstMove(
     private val board: Board,
     private val activePlayer: Player,
     private val history: List<Move> = List.empty()
-) : Game {
+) : HexGame {
 
     override fun makeMove(move: Move): MoveResult {
         return validateMove(move) ?: performMove(move as NormalMove).toSuccess()
     }
 
-    private fun performMove(move: NormalMove): Game {
+    private fun performMove(move: NormalMove): HexGame {
         return performNormalMove(move)
             .addToHistory(move)
             .checkIfGameHasEnded()
     }
 
-    private fun checkIfGameHasEnded(): Game = if (board.hasEnded()) generateEndGame() else this
+    private fun checkIfGameHasEnded(): HexGame = if (board.hasEnded()) generateEndGame() else this
 
-    private fun generateEndGame() = EndedGame(board, history, activePlayer.nextPlayer())
+    private fun generateEndGame() = EndedHexGame(board, history, activePlayer.nextPlayer())
 
     private fun addToHistory(move: Move) = this.copy(history = history.append(move))
 
-    private fun performNormalMove(move: NormalMove): GameAfterFirstMove = this.copy(
+    private fun performNormalMove(move: NormalMove): HexGameAfterFirstMove = this.copy(
         board = board.putPiece(move.point, move.player.getPiece()),
         activePlayer = activePlayer.nextPlayer()
     )

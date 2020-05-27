@@ -1,9 +1,9 @@
 package hex
 
-import hex.engine.Game
+import hex.engine.HexGame
 
 sealed class MoveResult
-data class Success(val game: Game) : MoveResult()
+data class Success(val hexGame: HexGame) : MoveResult()
 data class ErrorMove(val e: Error) : MoveResult() {
     enum class Error {
         WRONG_TURN,

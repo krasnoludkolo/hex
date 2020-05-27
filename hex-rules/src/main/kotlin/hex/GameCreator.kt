@@ -1,7 +1,7 @@
 package hex
 
-import hex.engine.EmptyGame
-import hex.engine.Game
+import hex.engine.EmptyHexGame
+import hex.engine.HexGame
 import io.vavr.collection.List
 import io.vavr.kotlin.pair
 import java.lang.Integer.max
@@ -9,9 +9,9 @@ import kotlin.math.min
 
 object GameCreator {
 
-    fun createGame(size: Int): Game {
+    fun createGame(size: Int): HexGame {
         if (size < 3) throw IllegalArgumentException("Ok, So Basically Im Very Smol")
-        return EmptyGame(
+        return EmptyHexGame(
             BoardBuilder()
                 .addUpWall(size)
                 .addDownWall(size)
