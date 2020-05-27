@@ -15,7 +15,7 @@ internal class EmptyHexGame(
         return when (move) {
             is SwitchMove -> ErrorMove.switchInWrongTurn()
             is NormalMove -> when {
-                move.player != RedPlayer -> ErrorMove.wrongTurn()
+                move.hexPlayer != RedHexPlayer -> ErrorMove.wrongTurn()
                 else -> null
             }
         }
@@ -27,5 +27,5 @@ internal class EmptyHexGame(
 
     override fun getHistory(): List<Move> = List.empty()
 
-    override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedPlayer)
+    override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedHexPlayer)
 }

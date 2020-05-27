@@ -5,7 +5,7 @@ import io.vavr.collection.List
 
 internal data class HexGameAfterFirstMove(
     private val board: Board,
-    private val activePlayer: Player,
+    private val activeHexPlayer: HexPlayer,
     private val history: List<Move> = List.empty()
 ) : HexGame {
 
@@ -21,13 +21,13 @@ internal data class HexGameAfterFirstMove(
 
     private fun checkIfGameHasEnded(): HexGame = if (board.hasEnded()) generateEndGame() else this
 
-    private fun generateEndGame() = EndedHexGame(board, history, activePlayer.nextPlayer())
+    private fun generateEndGame() = EndedHexGame(board, history, activeHexPlayer.nextPlayer())
 
     private fun addToHistory(move: Move) = this.copy(history = history.append(move))
 
     private fun performNormalMove(move: NormalMove): HexGameAfterFirstMove = this.copy(
-        board = board.putPiece(move.point, move.player.getPiece()),
-        activePlayer = activePlayer.nextPlayer()
+        board = board.putPiece(move.point, move.hexPlayer.getPiece()),
+        activeHexPlayer = activeHexPlayer.nextPlayer()
     )
 
     private fun validateMove(move: Move): ErrorMove? = when (move) {
@@ -37,7 +37,7 @@ internal data class HexGameAfterFirstMove(
 
     private fun validateNormalMove(move: NormalMove): ErrorMove? {
         return when {
-            move.player != activePlayer -> {
+            move.hexPlayer != activeHexPlayer -> {
                 ErrorMove.wrongTurn()
             }
             board.piecesMap.containsKey(move.point) -> {
@@ -49,6 +49,6 @@ internal data class HexGameAfterFirstMove(
 
     override fun getHistory(): List<Move> = history
 
-    override fun getStatus(): GameStatus = GameStatus.ongoing(board, activePlayer)
+    override fun getStatus(): GameStatus = GameStatus.ongoing(board, activeHexPlayer)
 
 }

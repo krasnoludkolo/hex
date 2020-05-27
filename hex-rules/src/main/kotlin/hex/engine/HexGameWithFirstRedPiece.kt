@@ -17,7 +17,7 @@ internal class HexGameWithFirstRedPiece(
         return when (move) {
             is SwitchMove -> null
             is NormalMove -> when {
-                move.player == RedPlayer -> ErrorMove.wrongTurn()
+                move.hexPlayer == RedHexPlayer -> ErrorMove.wrongTurn()
                 move.point == piecePoint -> ErrorMove.takenPlace()
                 else -> null
             }
@@ -34,13 +34,13 @@ internal class HexGameWithFirstRedPiece(
     private fun makeNormalMove(move: NormalMove): HexGameAfterFirstMove {
         val newBoard = board.putPiece(move)
         val newHistory = getHistory().append(move)
-        return HexGameAfterFirstMove(newBoard, RedPlayer, newHistory)
+        return HexGameAfterFirstMove(newBoard, RedHexPlayer, newHistory)
     }
 
     private fun makeSwitchMove(move: Move): HexGameAfterFirstMove {
         val newBoard = board.switch()
         val newHistory = getHistory().append(move)
-        return HexGameAfterFirstMove(newBoard, RedPlayer, newHistory)
+        return HexGameAfterFirstMove(newBoard, RedHexPlayer, newHistory)
     }
 
     private fun Board.switch(): Board {
@@ -51,9 +51,9 @@ internal class HexGameWithFirstRedPiece(
     }
 
     override fun getHistory(): List<Move> {
-        return List.of(NormalMove(RedPlayer, piecePoint))
+        return List.of(NormalMove(RedHexPlayer, piecePoint))
     }
 
-    override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedPlayer)
+    override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedHexPlayer)
 }
 

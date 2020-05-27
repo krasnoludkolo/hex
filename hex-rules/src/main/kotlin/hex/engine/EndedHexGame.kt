@@ -6,13 +6,13 @@ import io.vavr.collection.List
 class EndedHexGame(
     private val board: Board,
     private val history: List<Move>,
-    private val winner: Player
+    private val winner: HexPlayer
 ) : HexGame {
 
     override fun makeMove(move: Move): MoveResult = ErrorMove.endedGame()
 
     override fun getHistory(): List<Move> = history
 
-    override fun getStatus(): GameStatus = GameStatus.ended(board, winner)
+    override fun getStatus(): GameStatus = GameStatus.ended(board, winner, history)
 
 }

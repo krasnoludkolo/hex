@@ -31,7 +31,7 @@ internal class DetectEndHexGameTest {
         val status = game.getStatus()
 
         assertTrue { status is EndedGameStatus }
-        assertTrue { (status as EndedGameStatus).winner == RedPlayer }
+        assertTrue { (status as EndedGameStatus).winner == RedHexPlayer }
     }
 
     @Test
@@ -49,7 +49,7 @@ internal class DetectEndHexGameTest {
         val status = game.getStatus()
 
         assertTrue { status is EndedGameStatus }
-        assertTrue { (status as EndedGameStatus).winner == BluePlayer }
+        assertTrue { (status as EndedGameStatus).winner == BlueHexPlayer }
     }
 
 }

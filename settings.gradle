@@ -1,4 +1,6 @@
-rootProject.name = 'io.github.krasnoludkolo.hex-game'
+rootProject.name = 'hex'
 
 include ":hex-rules"
 include ":hex-game"
+include ":hex-runner"
+include ":hex-ai"

@@ -1,0 +1,11 @@
+dependencies {
+    api project(":hex-game")
+    api project(":hex-ai")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "11"
+}

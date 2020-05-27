@@ -19,7 +19,7 @@ data class Board(
         piecesMap = piecesMap.put(point, piece)
     )
 
-    fun putPiece(move: NormalMove) = putPiece(move.point, move.player.getPiece())
+    fun putPiece(move: NormalMove) = putPiece(move.point, move.hexPlayer.getPiece())
 
     fun hasEnded(): Boolean = isVerticalConnection() || hasHorizontalConnection()
 
