@@ -1,9 +1,9 @@
-package game.engine
+package hex.engine
 
-import game.GameStatus
-import game.Move
-import game.MoveResult
-import game.Success
+import hex.GameStatus
+import hex.Move
+import hex.MoveResult
+import hex.Success
 import io.vavr.collection.List
 
 interface Game {

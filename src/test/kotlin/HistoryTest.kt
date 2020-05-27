@@ -1,4 +1,4 @@
-import game.*
+import hex.*
 import io.vavr.collection.List
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

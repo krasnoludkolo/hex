@@ -1,6 +1,6 @@
-package game
+package hex
 
-import game.engine.Game
+import hex.engine.Game
 
 sealed class MoveResult
 data class Success(val game: Game) : MoveResult()

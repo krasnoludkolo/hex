@@ -1,4 +1,4 @@
-package game
+package hex
 
 sealed class Cell
 

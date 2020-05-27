@@ -1,6 +1,6 @@
-import game.BoardCell
-import game.GameCreator
-import game.OngoingGameStatus
+import hex.BoardCell
+import hex.GameCreator
+import hex.OngoingGameStatus
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

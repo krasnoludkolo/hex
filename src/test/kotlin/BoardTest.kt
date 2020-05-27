@@ -1,6 +1,6 @@
-import game.BoardBuilder
-import game.BoardCell
-import game.UpWallCell
+import hex.BoardBuilder
+import hex.BoardCell
+import hex.UpWallCell
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 

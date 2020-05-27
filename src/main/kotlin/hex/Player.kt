@@ -1,4 +1,4 @@
-package game
+package hex
 
 sealed class Player {
     fun nextPlayer() = if (this is RedPlayer) BluePlayer else RedPlayer

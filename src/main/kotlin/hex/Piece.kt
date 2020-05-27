@@ -1,4 +1,4 @@
-package game
+package hex
 
 sealed class Piece {
     fun getOpposite() = if (this is RedPiece) BluePiece else RedPiece

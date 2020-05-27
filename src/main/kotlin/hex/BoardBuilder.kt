@@ -1,4 +1,4 @@
-package game
+package hex
 
 import io.vavr.collection.HashMap
 import io.vavr.collection.Map

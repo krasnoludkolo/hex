@@ -1,4 +1,4 @@
-package game
+package hex
 
 data class Point(val x: Int, val y: Int) {
     override fun toString(): String {

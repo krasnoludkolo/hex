@@ -1,7 +1,7 @@
-package game
+package hex
 
-import game.engine.EmptyGame
-import game.engine.Game
+import hex.engine.EmptyGame
+import hex.engine.Game
 import io.vavr.collection.List
 import io.vavr.kotlin.pair
 import java.lang.Integer.max

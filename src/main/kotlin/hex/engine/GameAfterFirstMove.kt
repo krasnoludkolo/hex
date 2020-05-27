@@ -1,6 +1,6 @@
-package game.engine
+package hex.engine
 
-import game.*
+import hex.*
 import io.vavr.collection.List
 
 internal data class GameAfterFirstMove(
