@@ -1,0 +1,10 @@
+dependencies {
+    api project(":hex-rules")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
