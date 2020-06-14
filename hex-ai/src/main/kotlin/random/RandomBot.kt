@@ -10,10 +10,7 @@ class RandomBot(
     override fun makeMove(status: OngoingGameStatus): Move {
         val possiblePlaces = status
             .board
-            .adjacencyMap
-            .keySet()
-            .filterIsInstance<BoardCell>()
-            .filter { !status.board.piecesMap.keySet().contains(it.point) }
+            .emptyPlaces
 
         val cell = possiblePlaces
             .shuffled()

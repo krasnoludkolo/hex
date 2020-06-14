@@ -9,6 +9,7 @@ import io.vavr.kotlin.getOrNull
 data class Board(
     val adjacencyMap: Map<Cell, Set<Cell>> = HashMap.empty(),
     val piecesMap: Map<Point, Piece> = HashMap.empty(),
+    val emptyPlaces: List<BoardCell> = adjacencyMap.generateEmptyCells(piecesMap),
     val upWalls: Set<Cell> = adjacencyMap.keySet().filter { it is UpWallCell },
     val downWalls: Set<Cell> = adjacencyMap.keySet().filter { it is DownWallCell },
     val leftWalls: Set<Cell> = adjacencyMap.keySet().filter { it is LeftWallCell },
@@ -47,4 +48,10 @@ data class Board(
     }
 
 }
+
+private fun Map<Cell, Set<Cell>>.generateEmptyCells(piecesMap: Map<Point, Piece>) =
+    this.keySet()
+        .filterIsInstance<BoardCell>()
+        .filter { !piecesMap.keySet().contains(it.point) }
+
 

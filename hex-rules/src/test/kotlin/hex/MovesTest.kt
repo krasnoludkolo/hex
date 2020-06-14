@@ -106,4 +106,29 @@ internal class MovesTest {
         assertTrue { (moveResult as ErrorMove).e == ErrorMove.Error.SWITCH_IN_WRONG_TURN }
     }
 
+    @Test
+    fun `should show correct empty  places`() {
+        val gameStatus = GameCreator
+            .createGame(3)
+            .makeMoves(
+                red(2, 1),
+                blue(0, 1),
+                red(1, 1)
+            ).getStatus() as OngoingGameStatus
+        val board = gameStatus.board
+
+        assertTrue {
+            board.emptyPlaces.containsAll(
+                listOf(
+                    BoardCell(0 to 0),
+                    BoardCell(0 to 2),
+                    BoardCell(1 to 0),
+                    BoardCell(1 to 2),
+                    BoardCell(2 to 0),
+                    BoardCell(2 to 2)
+                )
+            )
+        }
+    }
+
 }
