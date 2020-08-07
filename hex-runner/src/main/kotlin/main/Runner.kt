@@ -1,13 +1,15 @@
 package main
 
+import alfabeta.AlfaBeta
+import alfabeta.evaluator.LongestPathEvaluator
 import hex.*
 import random.RandomBot
 
 fun main() {
-    val red = RandomBot("red", RedHexPlayer)
+    val red = AlfaBeta("red", 3, RedHexPlayer, LongestPathEvaluator())
     val blue = RandomBot("blue", BlueHexPlayer)
 
-    val (_, winner, history) = playGame(red, blue, 3)
+    val (_, winner, history) = playGame(red, blue, 5)
 
     println("Winner: $winner")
     history
