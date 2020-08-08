@@ -2,6 +2,7 @@ package alfabeta
 
 import alfabeta.evaluator.BoardEvaluator
 import hex.*
+import hex.status.OngoingGameStatus
 import io.vavr.collection.Set
 
 class AlfaBeta constructor(

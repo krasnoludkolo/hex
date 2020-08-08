@@ -1,17 +1,18 @@
 package hex.engine
 
 import hex.*
-import io.vavr.collection.List
+import hex.status.GameHistory
+import hex.status.GameStatus
 
 class EndedHexGame(
     private val board: Board,
-    private val history: List<Move>,
+    private val history: GameHistory,
     private val winner: HexPlayer
 ) : HexGame {
 
     override fun makeMove(move: Move): MoveResult = ErrorMove.endedGame()
 
-    override fun getHistory(): List<Move> = history
+    override fun getHistory(): GameHistory = history
 
     override fun getStatus(): GameStatus = GameStatus.ended(board, winner, history)
 

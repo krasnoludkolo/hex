@@ -1,6 +1,10 @@
 package random
 
-import hex.*
+import hex.HexPlayer
+import hex.Move
+import hex.NormalMove
+import hex.Player
+import hex.status.OngoingGameStatus
 
 class RandomBot(
     private val name: String,

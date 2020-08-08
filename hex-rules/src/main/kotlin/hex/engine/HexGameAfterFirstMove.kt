@@ -1,12 +1,13 @@
 package hex.engine
 
 import hex.*
-import io.vavr.collection.List
+import hex.status.GameHistory
+import hex.status.GameStatus
 
 internal data class HexGameAfterFirstMove(
     private val board: Board,
     private val activeHexPlayer: HexPlayer,
-    private val history: List<Move> = List.empty()
+    private val history: GameHistory
 ) : HexGame {
 
     override fun makeMove(move: Move): MoveResult {
@@ -23,7 +24,7 @@ internal data class HexGameAfterFirstMove(
 
     private fun generateEndGame() = EndedHexGame(board, history, activeHexPlayer.nextPlayer())
 
-    private fun addToHistory(move: Move) = this.copy(history = history.append(move))
+    private fun addToHistory(move: Move) = this.copy(history = history.addMove(move))
 
     private fun performNormalMove(move: NormalMove): HexGameAfterFirstMove = this.copy(
         board = board.putPiece(move.point, move.hexPlayer.getPiece()),
@@ -47,7 +48,7 @@ internal data class HexGameAfterFirstMove(
         }
     }
 
-    override fun getHistory(): List<Move> = history
+    override fun getHistory(): GameHistory = history
 
     override fun getStatus(): GameStatus = GameStatus.ongoing(board, activeHexPlayer)
 

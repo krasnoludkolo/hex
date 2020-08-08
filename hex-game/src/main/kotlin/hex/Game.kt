@@ -1,6 +1,8 @@
 package hex
 
 import hex.engine.HexGame
+import hex.status.EndedGameStatus
+import hex.status.OngoingGameStatus
 
 fun playGame(red: Player, blue: Player, size: Int): EndedGameStatus {
     val game = GameCreator.createGame(size)

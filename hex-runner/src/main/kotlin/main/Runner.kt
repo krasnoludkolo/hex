@@ -3,7 +3,9 @@ package main
 import HexUI
 import alfabeta.AlfaBeta
 import alfabeta.evaluator.LongestPathEvaluator
-import hex.*
+import hex.BlueHexPlayer
+import hex.RedHexPlayer
+import hex.playGame
 import random.RandomBot
 
 fun main() {
@@ -13,16 +15,8 @@ fun main() {
     val (board, winner, history) = playGame(red, blue, 5)
 
     println("Winner: $winner")
-    history
-        .map {
-            when (it) {
-                is NormalMove -> "(${it.point.x}:${it.point.y})"
-                is SwitchMove -> "S"
-            }
-        }
-        .forEach {
-            println(it)
-        }
 
-    HexUI.consoleUI().drawBoard(board)
+    val consoleUI = HexUI.consoleUI()
+    consoleUI.drawHistory(history)
+    consoleUI.drawBoard(board)
 }

@@ -1,5 +1,6 @@
 package hex
 
+import hex.status.OngoingGameStatus
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

@@ -1,7 +1,7 @@
 package alfabeta.evaluator
 
 import hex.GameCreator
-import hex.OngoingGameStatus
+import hex.status.OngoingGameStatus
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

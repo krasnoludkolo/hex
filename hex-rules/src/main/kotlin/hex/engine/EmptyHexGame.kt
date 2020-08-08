@@ -1,7 +1,8 @@
 package hex.engine
 
 import hex.*
-import io.vavr.collection.List
+import hex.status.GameHistory
+import hex.status.GameStatus
 
 internal class EmptyHexGame(
     private val board: Board
@@ -25,7 +26,7 @@ internal class EmptyHexGame(
         return Success(HexGameWithFirstRedPiece(board.putPiece(move), move.point))
     }
 
-    override fun getHistory(): List<Move> = List.empty()
+    override fun getHistory() = GameHistory.empty()
 
     override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedHexPlayer)
 }

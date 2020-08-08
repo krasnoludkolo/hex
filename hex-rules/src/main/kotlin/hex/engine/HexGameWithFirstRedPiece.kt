@@ -1,8 +1,9 @@
 package hex.engine
 
 import hex.*
+import hex.status.GameHistory
+import hex.status.GameStatus
 import io.vavr.collection.HashMap
-import io.vavr.collection.List
 
 internal class HexGameWithFirstRedPiece(
     private val board: Board,
@@ -33,13 +34,13 @@ internal class HexGameWithFirstRedPiece(
 
     private fun makeNormalMove(move: NormalMove): HexGameAfterFirstMove {
         val newBoard = board.putPiece(move)
-        val newHistory = getHistory().append(move)
+        val newHistory = getHistory().addMove(move)
         return HexGameAfterFirstMove(newBoard, RedHexPlayer, newHistory)
     }
 
     private fun makeSwitchMove(move: Move): HexGameAfterFirstMove {
         val newBoard = board.switch()
-        val newHistory = getHistory().append(move)
+        val newHistory = getHistory().addMove(move)
         return HexGameAfterFirstMove(newBoard, RedHexPlayer, newHistory)
     }
 
@@ -50,8 +51,8 @@ internal class HexGameWithFirstRedPiece(
         )
     }
 
-    override fun getHistory(): List<Move> {
-        return List.of(NormalMove(RedHexPlayer, piecePoint))
+    override fun getHistory(): GameHistory {
+        return GameHistory.withMove(NormalMove(RedHexPlayer, piecePoint))
     }
 
     override fun getStatus(): GameStatus = GameStatus.ongoing(board, RedHexPlayer)

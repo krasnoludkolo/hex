@@ -4,6 +4,9 @@ import HexUI
 import hex.Board
 import hex.Piece
 import hex.RedPiece
+import hex.status.FullGameTurn
+import hex.status.GameHistory
+import hex.status.HalfGameTurn
 
 internal class ConsoleUI : HexUI {
 
@@ -17,6 +20,20 @@ internal class ConsoleUI : HexUI {
         board.piecesMap.forEach { emptyBoard[it._1.x][it._1.y] = it._2.toCode() }
         emptyBoard
             .forEachIndexed { index, list -> drawRow(list, board.boardSize, index) }
+    }
+
+    override fun drawHistory(gameHistory: GameHistory) {
+        gameHistory
+            .turns
+            .mapIndexed { index, it ->
+                when (it) {
+                    is FullGameTurn -> "$index. ${it.redMove} ${it.blueMove}"
+                    is HalfGameTurn -> "$index. ${it.redMove}"
+                }
+            }
+            .forEach {
+                println(it)
+            }
     }
 
     private fun drawRow(row: List<Int>, size: Int, rowIndex: Int) {

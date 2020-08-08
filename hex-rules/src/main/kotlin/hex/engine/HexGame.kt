@@ -1,14 +1,14 @@
 package hex.engine
 
-import hex.GameStatus
 import hex.Move
 import hex.MoveResult
 import hex.Success
-import io.vavr.collection.List
+import hex.status.GameHistory
+import hex.status.GameStatus
 
 interface HexGame {
     fun makeMove(move: Move): MoveResult
-    fun getHistory(): List<Move>
+    fun getHistory(): GameHistory
     fun getStatus(): GameStatus
 
     fun HexGame.toSuccess(): Success = Success(this)
