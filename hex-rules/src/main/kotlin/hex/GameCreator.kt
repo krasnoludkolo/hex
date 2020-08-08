@@ -12,7 +12,7 @@ object GameCreator {
     fun createGame(size: Int): HexGame {
         if (size < 3) throw IllegalArgumentException("Ok, So Basically Im Very Smol")
         return EmptyHexGame(
-            BoardBuilder()
+            BoardBuilder(size)
                 .addUpWall(size)
                 .addDownWall(size)
                 .addLeftWall(size)

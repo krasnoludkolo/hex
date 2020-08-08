@@ -14,7 +14,8 @@ data class Board(
     val upWalls: Set<Cell> = adjacencyMap.keySet().filter { it is UpWallCell },
     val downWalls: Set<Cell> = adjacencyMap.keySet().filter { it is DownWallCell },
     val leftWalls: Set<Cell> = adjacencyMap.keySet().filter { it is LeftWallCell },
-    val rightWalls: Set<Cell> = adjacencyMap.keySet().filter { it is RightWallCell }
+    val rightWalls: Set<Cell> = adjacencyMap.keySet().filter { it is RightWallCell },
+    val boardSize: Int
 ) {
 
     fun putPiece(point: Point, piece: Piece) = copy(

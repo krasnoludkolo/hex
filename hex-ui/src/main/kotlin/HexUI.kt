@@ -1,7 +1,13 @@
-import hex.GameStatus
+import console.ConsoleUI
+import hex.Board
 
 interface HexUI {
 
-    fun drawBoard(game: GameStatus)
+    fun drawBoard(board: Board)
 
+    companion object {
+
+        fun consoleUI(): HexUI = ConsoleUI()
+
+    }
 }
