@@ -17,7 +17,7 @@ internal class ConsoleUI : HexUI {
     override fun drawBoard(board: Board) {
         val emptyBoard = List(board.boardSize) { List(board.boardSize) { EMPTY }.toMutableList() }.toMutableList()
         //TODO immutable
-        board.piecesMap.forEach { emptyBoard[it._1.y][it._1.x] = it._2.toCode() }
+        board.piecesMap.forEach { emptyBoard[it._1.x][it._1.y] = it._2.toCode() }
         emptyBoard
             .forEachIndexed { index, list -> drawRow(list, board.boardSize, index) }
     }
