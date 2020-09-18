@@ -7,7 +7,7 @@ import io.vavr.collection.Set
 import io.vavr.kotlin.getOrNull
 import io.vavr.kotlin.toVavrList
 
-class LongestPathEvaluator : BoardEvaluator {
+class LongestClusterEvaluator : BoardEvaluator {
 
     override fun evaluate(board: Board): Double {
         val groupBy = board.piecesMap

@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-internal class LongestPathEvaluatorTest {
+internal class LongestClusterEvaluatorTest {
 
     @Test
     fun `should evaluate board after first move`() {
-        val evaluator = LongestPathEvaluator()
+        val evaluator = LongestClusterEvaluator()
         val gameStatus = GameCreator
             .createGame(3)
             .makeMoves(
@@ -24,7 +24,7 @@ internal class LongestPathEvaluatorTest {
 
     @Test
     fun `should evaluate board after first moves`() {
-        val evaluator = LongestPathEvaluator()
+        val evaluator = LongestClusterEvaluator()
         val gameStatus = GameCreator
             .createGame(3)
             .makeMoves(
@@ -39,7 +39,7 @@ internal class LongestPathEvaluatorTest {
 
     @Test
     fun `should calculate longest path`() {
-        val evaluator = LongestPathEvaluator()
+        val evaluator = LongestClusterEvaluator()
         val gameStatus = GameCreator
             .createGame(3)
             .makeMoves(
